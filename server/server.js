@@ -2,7 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const app = express();
 const PORT = process.env.PORT;
-const authRouter = require('./router/authentication.router');
+const authRouter = require('./routes/authentication.router');
 const dbConnect = require('./database/database');
 
 // Database Connection
