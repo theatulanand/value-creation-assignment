@@ -60,6 +60,82 @@ class ValidationService {
         };
     }
 
+    validatePolicyForm({ pt, ppt, premiumFrequency, modelPremium, sumAssured, dob }) {
+
+        //console.log({ pt, ppt, premiumFrequency, modelPremium, sumAssured, dob });
+
+        if (!pt || !ppt || !premiumFrequency || !modelPremium || !sumAssured || !dob) {
+            const message = "All Fields are required";
+            return { status: false, message }
+        }
+
+        if (isNaN(pt)) {
+            const message = "PT Should Be A Number";
+            return { status: false, message }
+        }
+
+        if (isNaN(ppt)) {
+            const message = "PPT Should Be A Number";
+            return { status: false, message }
+        }
+
+        if (isNaN(modelPremium)) {
+            const message = "Model Premium Should Be A Number";
+            return { status: false, message }
+        }
+
+        if (isNaN(sumAssured)) {
+            const message = "Sum Assured Should Be A Number";
+            return { status: false, message }
+        }
+
+        if (ppt < 5 || ppt > 10) {
+            const message = "PPT Should Be Greater Than 5 and less than 10";
+            return { status: false, message }
+        }
+
+        if (pt < 10 || pt > 20) {
+            const message = "PT Should Be Greater Than 10 and less than 20";
+            return { status: false, message }
+        }
+
+        if (Number(pt) < Number(ppt)) {
+            return { status: false, message }
+        }
+
+        if (premiumFrequency != "yearly" && premiumFrequency != "half-yearly" && premiumFrequency != "monthly") {
+            const message = "Invalid Premium Frequency";
+            return { status: false, message }
+        }
+
+        if (sumAssured < modelPremium * 10) {
+            if (sumAssured != 5000000) {
+                const message = "Sum Assured should be greater than 10 times of model premium or 5000000";
+                return { status: false, message }
+            } else {
+                const message = "Sum Assured should be greater than 10 times of model premium or 5000000";
+                return { status: false, message }
+            }
+        }
+
+        const dateArray = dob.trim().split("-").map(Number);
+
+        const currentYear = new Date().getFullYear();
+
+        const age = currentYear - dateArray[0];
+
+        if (age < 23 || age > 56) {
+            const message = "Age should be less than 23 or greater than 56";
+            return { status: false, message }
+        }
+
+        return {
+            status: true,
+            message: "Data are valid"
+        }
+
+    }
+
 
 }
 
