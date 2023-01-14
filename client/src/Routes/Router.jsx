@@ -3,7 +3,7 @@ import { Route, Routes } from 'react-router-dom'
 import { Private } from '../components/Private'
 import { Illustration } from '../Pages/Illustration'
 import Login from '../Pages/Login'
-import { PolicyCalculation } from '../Pages/PolicyCalculation'
+import PolicyCalculation from '../Pages/PolicyCalculation'
 import Register from '../Pages/Register'
 
 export const Router = () => {
